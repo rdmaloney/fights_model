@@ -8,7 +8,7 @@ import datetime
 import sqlite3
 import time
 
-
+all_links = []
 e_name = []
 f1 = []
 f2 = []
