@@ -14,6 +14,8 @@ f1 = []
 f2 = []
 all_rows = []
 fighters = []
+fights_table = []
+
 
 
 def scrape_data():
@@ -32,8 +34,9 @@ def scrape_data():
         h2 = soup.find("h2")
         e_name.append(h2.text.strip())
 
-        fights_table = soup.find('table',{'class':"b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"}).find('tbody', 'class':{"b-fight-details__table-body"}).find('tr').find_next('tr')
-        fighters = fights_table.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
+        fights_table = soup.find('table',{'class':"b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"}.find('tbody',{'class':"b-fight-details__table-body"}).find('tr').find_next('tr'),
+        
+        fighters = fights_table.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")}))
 
         try:
 
