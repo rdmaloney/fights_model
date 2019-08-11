@@ -35,7 +35,7 @@ def scrape_data():
         fights_table = soup.find('table', {
             "class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
 
-        all_rows = fights_table.find_all('tr', {"class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"})
+        all_rows = fights_table.find_all('tr')
 
         for row in all_rows:
 
