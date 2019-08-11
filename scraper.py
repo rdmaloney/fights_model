@@ -13,6 +13,7 @@ e_name = []
 f1 = []
 f2 = []
 all_rows = []
+fighters = []
 
 
 def scrape_data():
@@ -34,12 +35,10 @@ def scrape_data():
         fights_table = soup.find('table', {
             "class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
 
-        rows = fights_table.find_all('tr', {
-            "class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"
+        all_rows = fights_table.find_all('tr', {
+        "class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"
 
-        for row in all_rows:
-
-            fighters = rows.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
+        fighters = all_rows.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
 
             try:
 
@@ -78,3 +77,4 @@ conn = sqlite3.connect('data.sqlite')
 df.to_sql('data', conn, if_exists='replace')
 print('Db successfully constructed and saved')
 conn.close()
+
