@@ -37,7 +37,7 @@ def scrape_data():
    
             rows = fights_table.find_all('tr', {"class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"
             
-               for rows in rows:
+               for rows in row:
 
 
                     fighters = rows.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
