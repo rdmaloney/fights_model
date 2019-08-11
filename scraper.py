@@ -28,20 +28,19 @@ def scrape_data():
 
         for link in all_links:
             print(f"Now currently scraping link: {link}")
-
-            data = requests.get(link)
-            soup = BeautifulSoup(data.text, 'html.parser')
             time.sleep(1)
 
             h2 = soup.find("h2")
             e_name.append(h2.text.strip())
 
-            rows = soup.find_all('table', {"class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
+            fights_table = soup.find('table', {"class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
+   
+            rows = fights_table.find_all('tr', {"class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"
+            
+               for row in rows:
 
-            for row in rows:
 
-
-                    fighters = row.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
+                    fighters = rows.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
 
                     try:
                         f1.append(fighters[0].text.strip())
