@@ -35,20 +35,21 @@ def scrape_data():
         fights_table = soup.find('table', {
             "class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
 
-        all_rows = fights_table.find_all('tr', {
-        "class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"
+        all_rows = fights_table.find_all('tr', {"class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"})
 
-        fighters = all_rows.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
+        for row in all_rows:
+
+            fighters = all_rows.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
 
             try:
 
-            f1.append(fighters[0].text.strip())
-            f2.append(fighters[1].text.strip())
+                f1.append(fighters[0].text.strip())
+                f2.append(fighters[1].text.strip())
 
             except IndexError:
 
-            f1.append("null")
-            f2.append("null")
+                f1.append("null")
+                f2.append("null")
 
             continue
 
@@ -77,4 +78,3 @@ conn = sqlite3.connect('data.sqlite')
 df.to_sql('data', conn, if_exists='replace')
 print('Db successfully constructed and saved')
 conn.close()
-
