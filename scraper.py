@@ -32,7 +32,7 @@ def scrape_data():
         h2 = soup.find("h2")
         e_name.append(h2.text.strip())
 
-        fights_table = soup.find("table").find("tbody").find_all("tr")
+        fights_table = soup.find('table').find('tbody').find('tr').find_next('tr')
 
         fighters = fights_table.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
 
