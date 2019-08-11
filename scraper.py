@@ -32,14 +32,9 @@ def scrape_data():
         h2 = soup.find("h2")
         e_name.append(h2.text.strip())
 
-        fights_table = soup.find('table', {
-            "class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
-
-        all_rows = fights_table.find_all('tr')
-
-        for row in all_rows:
-
-            fighters = all_rows.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
+        fights_table = soup.find('table', {"class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"}).find("tbody").find_all("tr")
+        
+            fighters = fights_table.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
 
             try:
 
