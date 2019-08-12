@@ -12,55 +12,53 @@ all_links = []
 e_name = []
 f1 = []
 f2 = []
-all_rows = []
-fighters = []
-fights=[]
+
 
 
 
 def scrape_data():
-    data = requests.get("http://ufcstats.com/statistics/events/upcoming")
-    soup = BeautifulSoup(data.text, 'html.parser')
-    table = soup.find('table', {"class": "b-statistics__table-events"})
-    links = table.find_all('a', href=True)
 
-    for link in links:
-        all_links.append(link.get('href'))
+        data = requests.get("http://ufcstats.com/statistics/events/upcoming")
+        soup = BeautifulSoup(data.text, 'html.parser')
+        table = soup.find('table', {"class": "b-statistics__table-events"})
+        links = table.find_all('a', href=True)
 
-    for link in all_links:
-        print(f"Now currently scraping link: {link}")
-        time.sleep(1)
+        for link in links:
+            all_links.append(link.get('href'))
 
-        h2 = soup.find("h2")
-        e_name.append(h2.text.strip())
+        for link in all_links:
+            print(f"Now currently scraping link: {link}")
 
-    fights= soup.find('table',{'class':"b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
-    
-    for fight in fights:
+            data = requests.get(link)
+            soup = BeautifulSoup(data.text, 'html.parser')
+            time.sleep(1)
 
-        fighters = fights.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
+            h2 = soup.find("h2")
+            e_name.append(h2.text.strip())
 
-        try:
+            rows = soup.find_all('table', {"class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
 
-            f1.append(fighters[0].text.strip())
-            f2.append(fighters[1].text.strip())
-
-        except IndexError:
-
-            f1.append("null")
-            f2.append("null")
-
-        continue
+            for row in rows:
 
 
-    return None
+                    fighters = row.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
+
+                    try:
+                        f1.append(fighters[0].text.strip())
+                        f2.append(fighters[1].text.strip())
+                    except IndexError:
+                        f1.append("null")
+                        f2.append("null")
+                    continue
 
 
-# preprocessing
+        return None
+
+#preprocessing
 # remove rows where DOB is null
 # impute stance as orthodox for missing stances
 def create_df():
-    # create empty dataframe
+    #create empty dataframe
     df = pd.DataFrame()
 
     df["Event"] = e_name
@@ -68,7 +66,6 @@ def create_df():
     df["Fighter2"] = f2
 
     return df
-
 
 scrape_data()
 df = create_df()
