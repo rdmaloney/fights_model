@@ -39,7 +39,7 @@ def scrape_data():
         
             rows = soup.find('table', {"class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
             
-            rows = sorted(set(rows)    
+               
             
             for row in rows:
                 
