@@ -36,7 +36,7 @@ def scrape_data():
             h2 = soup.find("h2")
             e_name.append(h2.text.strip())
 
-            rows = soup.find_all('tr', {"class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"})
+            rows = soup.find('tr', {"class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"})
 
             for row in rows:
 
