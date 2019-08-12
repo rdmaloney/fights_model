@@ -18,7 +18,7 @@ f2 = []
 
 def scrape_data():
     for alpha in alphabets:
-        links.append("http://www.fightmetric.com/statistics/fighters?char=" + alpha + "&page=all")
+        links.append("http://www.ufcstats.com/statistics/events/upcoming?page=all")
 
     # now that we have a list of links we need to iterate it with BeautifulSoup
     for link in links:
