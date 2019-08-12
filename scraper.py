@@ -30,12 +30,7 @@ def scrape_data():
 
     # list to store url page of fighters
     fighters = []
-
-    for name in names:
-        fighters.append(name['href'])
-
-    fighters = sorted(set(fighters))
-
+    
     for fighter in fighters:
 
         h2 = soup.find("h2")
