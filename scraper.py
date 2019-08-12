@@ -25,8 +25,6 @@ def scrape_data():
 
         for link in links:
             all_links.append(link.get('href'))
-
-        for link in all_links:
             print(f"Now currently scraping link: {link}")
 
             data = requests.get(link)
@@ -40,8 +38,11 @@ def scrape_data():
         
         
             rows = soup.find('table', {"class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
-
+            
+            rows = sorted(set(rows)    
+            
             for row in rows:
+                
                     data = requests.get(rows)
                     soup = BeautifulSoup(data.text, 'html.parser')
 
