@@ -42,7 +42,7 @@ def scrape_data():
             rows = soup.find('table', {"class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
 
             for row in rows:
-                    data = requests.get()rows
+                    data = requests.get(rows)
                     soup = BeautifulSoup(data.text, 'html.parser')
 
                     fighters = row.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
