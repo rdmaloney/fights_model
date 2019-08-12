@@ -36,10 +36,14 @@ def scrape_data():
             h2 = soup.find("h2")
             e_name.append(h2.text.strip())
 
-            rows = soup.find_all('table', {"class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
+            rows = []
+        
+        
+            rows = soup.find('table', {"class": "b-fight-details__table b-fight-details__table_style_margin-top b-fight-details__table_type_event-details js-fight-table"})
 
             for row in rows:
-
+                    data = requests.get()rows
+                    soup = BeautifulSoup(data.text, 'html.parser')
 
                     fighters = row.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
 
