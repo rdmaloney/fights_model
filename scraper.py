@@ -33,13 +33,14 @@ def scrape_data():
             soup = BeautifulSoup(data.text, 'html.parser')
             time.sleep(1)
 
-            h2 = soup.find("h2")
-            e_name.append(h2.text.strip())
+            
 
             rows = soup.find_all('tr', {"class": "b-fight-details__table-row b-fight-details__table-row__hover js-fight-details-click"})
 
             for row in rows:
-
+                    
+                    h2 = soup.find("h2")
+                    e_name.append(h2.text.strip())
 
                     fighters = row.find_all('a', {"href": re.compile("http://ufcstats.com/fighter-details")})
 
